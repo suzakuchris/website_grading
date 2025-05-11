@@ -10,7 +10,6 @@ use App\Models\User;
 class AuthController extends Controller
 {
     public function init(Request $req){
-        dd("Done");
         $user = new User();
         $user->name = "superadmin";
         $user->email = "superadmin@website.com";
