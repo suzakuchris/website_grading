@@ -37,7 +37,7 @@
             <thead>
                 <tr>
                     <th class="auto-width">No.</th>
-                    <th>Kode Item</th>
+                    <th>Kode Pick</th>
                     <th>Negara</th>
                     <th>Tahun</th>
                     <th>Nominal</th>
@@ -261,7 +261,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <label>Kode Item</label>
+                                <label>Kode Pick</label>
                                 <input type="text" class="form-control" name="item_code" required placeholder="Masukan Kode Item">
                             </div>
                         </div>

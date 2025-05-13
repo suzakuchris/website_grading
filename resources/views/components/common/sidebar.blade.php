@@ -34,7 +34,7 @@
                     <div class="collapse ps-4" id="collapseExample">
                       <a class="py-2 my-1" href="{{route('master.item')}}">
                           <i class='bi bi-collection icon'></i>  
-                          <span class="text nav-text">Item</span>
+                          <span class="text nav-text">Details</span>
                       </a>
                       <a class="py-2 my-1" href="{{route('master.company')}}">
                           <i class='bi bi-currency-exchange icon'></i>  
