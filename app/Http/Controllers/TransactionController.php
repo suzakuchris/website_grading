@@ -138,6 +138,7 @@ class TransactionController extends Controller
                     $detail->detail_serial_number = $bank_notes['detail_serial_number'];
 
                     $detail->detail_has_error = $bank_notes['detail_has_error'];
+                    $detail->detail_base_fee = $bank_notes['detail_base_fee'];
                     $detail->detail_oversize_fee = $bank_notes['detail_oversize_fee'];
                     $detail->detail_pedigree_fee = $bank_notes['detail_pedigree_fee'];
                     $detail->detail_onsite_fee = $bank_notes['detail_onsite_fee'];
@@ -151,7 +152,9 @@ class TransactionController extends Controller
                     +
                     $detail->detail_pedigree_fee
                     +
-                    $detail->detail_onsite_fee;
+                    $detail->detail_onsite_fee
+                    +
+                    $detail->detail_base_fee;
 
                     $header->grand_total += $subtotal;
                 }
@@ -170,6 +173,7 @@ class TransactionController extends Controller
 
                     $detail->detail_has_error = $coins['detail_has_error'];
                     $detail->detail_ncs_fee = $coins['detail_ncs_fee'];
+                    $detail->detail_base_fee = $bank_notes['detail_base_fee'];
                     $detail->detail_oversize_fee = $coins['detail_oversize_fee'];
                     $detail->detail_pedigree_fee = $coins['detail_pedigree_fee'];
                     $detail->detail_onsite_fee = $coins['detail_onsite_fee'];
@@ -187,7 +191,9 @@ class TransactionController extends Controller
                     +
                     $detail->detail_pedigree_fee
                     +
-                    $detail->detail_onsite_fee;
+                    $detail->detail_onsite_fee
+                    +
+                    $detail->detail_base_fee;
 
                     $header->grand_total += $subtotal;
                 }

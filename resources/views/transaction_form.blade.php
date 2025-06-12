@@ -54,7 +54,7 @@
                                 @if(isset($transaction))
                                 @foreach($transaction->bank_notes as $bank)
                                  @php 
-                                    $subtotal = $bank->detail_onsite_fee+$bank->detail_pedigree_fee+$bank->detail_oversize_fee;
+                                    $subtotal = $bank->detail_onsite_fee+$bank->detail_pedigree_fee+$bank->detail_oversize_fee+$bank->detail_base_fee;
                                     $total += $subtotal;
                                 @endphp
                                 <tr class="parent_row">
@@ -100,6 +100,12 @@
                                                 <td class="auto-width">Error?</td>
                                                 <td>
                                                     <div>@if($bank->detail_has_error == 1) Ya @else Tidak @endif</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="auto-width">Base Fee</td>
+                                                <td>
+                                                    <div>{{comma_separated($bank->detail_base_fee)}}</div>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -162,7 +168,7 @@
                                 @if(isset($transaction))
                                 @foreach($transaction->coins as $coin)
                                 @php 
-                                    $subtotal = $coin->detail_onsite_fee+$coin->detail_ncs_fee+$coin->detail_pedigree_fee+$coin->detail_oversize_fee;
+                                    $subtotal = $coin->detail_onsite_fee+$coin->detail_ncs_fee+$coin->detail_pedigree_fee+$coin->detail_oversize_fee+$coin->detail_base_fee;
                                     $total += $subtotal;
                                 @endphp
                                 <tr class="parent_row">
@@ -220,6 +226,12 @@
                                                 <td class="auto-width">NCS Fee</td>
                                                 <td>
                                                     <div>{{comma_separated($coin->detail_ncs_fee)}}</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="auto-width">Base Fee</td>
+                                                <td>
+                                                    <div>{{comma_separated($coin->detail_base_fee)}}</div>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -441,6 +453,25 @@
         });
     }
 
+    function set_base_fee(select){
+        var select = $(select);
+
+        console.log(select.val());
+
+        var modal = select.closest('.modal');
+        modal.find("[name='base']").val(0);
+        modal.find("[name='base-text']").val(numberWithCommas(0));
+
+        if(select.val() == "" || !select.val()){
+            return;
+        }
+        
+        var data = select.find(':selected').data('basefee');
+
+        modal.find("[name='base']").val(data);
+        modal.find("[name='base-text']").val(numberWithCommas(data));
+    }
+
     function calculate_total(){
         var subtotals = $(".subtotal_fee");
         var total_fee = 0;
@@ -504,15 +535,17 @@
         var error_id = error_select.val();
         var error_text = error_data.text;
 
+        var base_fee = form.find("[name='base']").val();
         var oversize_fee = form.find("[name='oversize']").val();
         var pedigree_fee = form.find("[name='pedigree']").val();
         var onsite_fee = form.find("[name='onsite']").val();
 
+        console.log(base_fee);
         console.log(oversize_fee);
         console.log(pedigree_fee);
         console.log(onsite_fee);
 
-        var subtotal_fee = parseFloat(oversize_fee)+parseFloat(pedigree_fee)+parseFloat(onsite_fee);
+        var subtotal_fee = parseFloat(base_fee)+parseFloat(oversize_fee)+parseFloat(pedigree_fee)+parseFloat(onsite_fee);
 
         var row = `
             <tr class="parent_row">
@@ -565,6 +598,13 @@
                             <td>
                                 <div>`+error_text+`</div>
                                 <input type="hidden" name="grading_banknotes[`+rowid+`][detail_has_error]" value="`+error_id+`">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="auto-width">Base Fee</td>
+                            <td>
+                                <div>`+numberWithCommas(base_fee)+`</div>
+                                <input type="hidden" name="grading_banknotes[`+rowid+`][detail_base_fee]" value="`+base_fee+`">
                             </td>
                         </tr>
                         <tr>
@@ -657,12 +697,13 @@
         var error_id = error_select.val();
         var error_text = error_data.text;
 
+        var base_fee = form.find("[name='base']").val();
         var oversize_fee = form.find("[name='oversize']").val();
         var pedigree_fee = form.find("[name='pedigree']").val();
         var onsite_fee = form.find("[name='onsite']").val();
         var ncs_fee = form.find("[name='ncs']").val();
 
-        var subtotal_fee = parseFloat(oversize_fee)+parseFloat(pedigree_fee)+parseFloat(onsite_fee)+parseFloat(ncs_fee);
+        var subtotal_fee = parseFloat(base_fee)+parseFloat(oversize_fee)+parseFloat(pedigree_fee)+parseFloat(onsite_fee)+parseFloat(ncs_fee);
 
         var row = `
             <tr class="parent_row">
@@ -729,6 +770,13 @@
                             <td>
                                 <div>`+numberWithCommas(ncs_fee)+`</div>
                                 <input type="hidden" name="grading_coins[`+rowid+`][detail_ncs_fee]" value="`+ncs_fee+`">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="auto-width">Oversize Fee</td>
+                            <td>
+                                <div>`+numberWithCommas(base_fee)+`</div>
+                                <input type="hidden" name="grading_coins[`+rowid+`][detail_base_fee]" value="`+base_fee+`">
                             </td>
                         </tr>
                         <tr>
@@ -886,7 +934,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Tier</label>
-                                <select name="tier_id" class="tier-select form-control select-searchable">
+                                <select name="tier_id" onchange="set_base_fee(this);" class="tier-select form-control select-searchable">
                                     <option value="" selected disabled>Pilih Company</option>
                                 </select>
                             </div>
@@ -899,6 +947,13 @@
                                     <option value="0">Tidak</option>
                                     <option value="1">Ya</option>
                                 </select>
+                            </div>
+                        </div>
+                         <div class="col-12">
+                            <div class="form-group">
+                                <label>Base Fee</label>
+                                <input readonly type="text" data-target="base" class="form-control comma-separated" name="base-text" required placeholder="Masukan Nominal">
+                                <input id="base" type="hidden" name="base" value="0" required>
                             </div>
                         </div>
                         <div class="col-12">
@@ -1015,7 +1070,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Tier</label>
-                                <select name="tier_id" class="tier-select form-control select-searchable">
+                                <select name="tier_id" onchange="set_base_fee(this);" class="tier-select form-control select-searchable">
                                     <option value="" selected disabled>Pilih Company</option>
                                 </select>
                             </div>
@@ -1028,6 +1083,13 @@
                                     <option value="0">Tidak</option>
                                     <option value="1">Ya</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Base Fee</label>
+                                <input readonly type="text" data-target="base_coin" class="form-control comma-separated" name="base-text" required placeholder="Masukan Nominal">
+                                <input id="base_coin" type="hidden" name="base" value="0" required>
                             </div>
                         </div>
                         <div class="col-12">
