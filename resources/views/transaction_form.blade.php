@@ -296,8 +296,8 @@
             <div class="col-12">
                 <div class="form-group">
                     <label>Rate USD to IDR</label>
-                    <input placeholder="0" class="form-control comma-separated" data-target="usd_rate" type="text" name="usd_rate_text" @if(isset($transaction)) value="{{comma_separated($transaction->usd_rate)}}" @endif>
-                    <input type="hidden" id="usd_rate" name="usd_rate" @if(isset($transaction)) value="{{($transaction->usd_rate)}}" @endif>
+                    <input required placeholder="0" class="form-control comma-separated" data-target="usd_rate" type="text" name="usd_rate_text" @if(isset($transaction)) value="{{comma_separated($transaction->usd_rate)}}" @endif>
+                    <input required type="hidden" id="usd_rate" name="usd_rate" @if(isset($transaction)) value="{{($transaction->usd_rate)}}" @endif>
                 </div>
             </div>
             @if(isset($transaction))
