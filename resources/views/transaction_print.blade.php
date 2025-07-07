@@ -138,7 +138,7 @@
                                 <tfoot>
                                     <tr>
                                         <td colspan="11" class="text-center"><b>TOTAL</b></td>
-                                        <td>$&nbsp;{{comma_separated($grand_total)}}</td>
+                                        <td>$&nbsp;{{comma_separated($grand_total * $header->usd_rate)}}</td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -206,7 +206,7 @@
                                 <tfoot>
                                     <tr>
                                         <td colspan="14" class="text-center"><b>TOTAL</b></td>
-                                        <td>$&nbsp;{{comma_separated($grand_total)}}</td>
+                                        <td>$&nbsp;{{comma_separated($grand_total * $header->usd_rate)}}</td>
                                     </tr>
                                 </tfoot>
                             </table>
