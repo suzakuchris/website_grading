@@ -38,6 +38,7 @@
                 <tr>
                     <th class="auto-width">No.</th>
                     <th>Kode Pick</th>
+                    <th>Nama</th>
                     <th>Negara</th>
                     <th>Tahun</th>
                     <th>Nominal</th>
@@ -118,6 +119,7 @@
                 <tr>
                     <td>`+(++page)+`.</td>
                     <td>`+y.item_code+`</td>
+                    <td>`+y.item_name+`</td>
                     <td>`+y.country_name+`</td>
                     <td>`+y.tahun+`</td>
                     <td>`+numberWithCommas(y.nominal)+`</td>
@@ -181,6 +183,7 @@
         form.trigger('reset');
         form.find("[name='item_id']").val(data.item_id);
         form.find("[name='item_code']").val(data.item_code)
+        form.find("[name='item_name']").val(data.item_name)
         form.find("[name='kd_negara']").val(data.kd_negara)
         form.find("[name='tahun']").val(data.tahun)
         form.find("[name='nominal-text']").val(numberWithCommas(data.nominal))
@@ -263,6 +266,12 @@
                             <div class="form-group">
                                 <label>Kode Pick</label>
                                 <input type="text" class="form-control" name="item_code" required placeholder="Masukan Kode Item">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Nama</label>
+                                <input type="text" class="form-control" name="item_name" required placeholder="Masukan Nama Detail Item">
                             </div>
                         </div>
                         <div class="col-12">

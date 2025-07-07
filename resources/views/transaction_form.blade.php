@@ -6,6 +6,12 @@
 
 @section('content')
 <form action="{{route('transaction.save')}}" method="POST" onsubmit="pre_submit(event, this);">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-auto">
+            <a href="{{route('transaction.print', ['header_id' => $transaction->header_id])}}" class="btn btn-primary"><i class="bi bi-printer me-2"></i>Print</a>
+        </div>
+    </div>
     <fieldset @if($mode != 'add') disabled @endif class="border-0 p-2">
         @php
             if(isset($transaction)){
@@ -15,7 +21,7 @@
         @endphp
         {{csrf_field()}}
         <div class="row">
-            <div class="col-12">
+            <div class="col">
                 <div class="form-group">
                     <label>No. Invoice</label>
                     <input class="form-control" type="text" name="no_invoice" placeholder="00001/YYYY/MM/DD/CCCCC" @if(isset($transaction)) value="{{$transaction->inv_number}}" @endif disabled>

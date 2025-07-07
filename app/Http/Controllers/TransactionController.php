@@ -353,11 +353,18 @@ class TransactionController extends Controller
             }
 
             DB::commit();
-            return redirect()->route('transaction.payment.view', ['header_id' => $header->header_id, 'payment_id' => $payment->payment_id])->with(['success_message' => 'Transaksi berhasil dibuat']);
+            return redirect()->route('transaction.view', ['header_id' => $header->header_id])->with(['success_message' => 'Transaksi berhasil dibuat']);
         }catch(Exception $e){
             DB::rollback();
             return redirect()->back()->withInput()->with(['error_message' => 'Terjadi kesalahan'.$e->getMessage()]);
         }
+    }
+
+    public function print(Request $req){
+        $header_id = $req->header_id;
+        $data['header'] = Transaction_Header::find($header_id);
+        $data['type'] = 'INVOICE';
+        return view('transaction_print', $data);
     }
 
     public function delete_payment(Request $req){

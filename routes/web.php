@@ -108,6 +108,7 @@ Route::group(['middleware' => 'auth'], function(){
         
         Route::get('/add', [TransactionController::class, 'add'])->name('transaction.add');
         Route::get('/view/{header_id?}', [TransactionController::class, 'view'])->name('transaction.view');
+        Route::get('/print/{header_id?}', [TransactionController::class, 'print'])->name('transaction.print');
         Route::post('/upsert', [TransactionController::class, 'save'])->name('transaction.save');
         Route::post('/payment_attachment', [TransactionController::class, 'search_payment_attachment'])->name('transaction.payment.attachment');
 

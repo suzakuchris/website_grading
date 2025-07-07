@@ -191,7 +191,7 @@
         var _row = $("#factory-table tr.input-row").clone();
         var image = `<img style="width:100px;height:auto;max-height:200px;" src="`+input_b64.val()+`">`;
         _row.find(".image-wrapper").html(image);
-        // input.addClass('d-none').appendTo(_row.find(".input-wrapper"));
+        input.addClass('d-none').appendTo(_row.find(".input-wrapper"));
         input.val('');
         input_b64.attr('name', 'payment_images_add[]').appendTo(_row.find(".input-wrapper"));
 

@@ -29,7 +29,8 @@ class ItemController extends Controller
             $search = $req->search;
             $qr_data = $qr_data->where(function($query) use($search){
                 $query->where('a.nominal', 'like', '%'.$search.'%')
-                ->orWhere('a.item_code', 'like', '%'.$search.'%');
+                ->orWhere('a.item_code', 'like', '%'.$search.'%')
+                ->orWhere('a.item_name', 'like', '%'.$search.'%');
             });
         }
 
@@ -60,6 +61,7 @@ class ItemController extends Controller
             'tahun' => 'required|numeric',
             'kd_negara' => 'required|numeric',
             'nominal' => 'required|numeric',
+            'item_name' => 'required|max:500',
         ],[
             'item_code.required' => 'Kode barang harus dimasukan',
             'item_code.max' => 'Kode barang tidak boleh lebih dari :max karakter',
@@ -97,6 +99,7 @@ class ItemController extends Controller
                 $item->created_by = $user;
             }
 
+            $item->item_name = $req->item_name;
             $item->item_code = $req->item_code;
             $item->tahun = $req->tahun;
             $item->kd_negara = $req->kd_negara;
