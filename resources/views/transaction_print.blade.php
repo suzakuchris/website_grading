@@ -81,8 +81,12 @@
                                     <li>Bisa terjadi penyesuaian Tier dan Biaya jika ada perubahan dari final invoice PMG atau PCGS.</li>
                                 </ol>
                             </div>
+                            <div class="pt-2"><i>(USD Rate: {{comma_separated($header->usd_rate)}})</i></div>
                         </div>
                     </div>
+                    @php
+                        $grand_grand_total = 0;
+                    @endphp
                     <div class="row py-3">
                         <div class="col-12">
                             <table class="table table-bordered text-center">
@@ -118,6 +122,7 @@
                                         + $item->detail_pedigree_fee
                                         + $item->detail_onsite_fee;
                                         $grand_total += $total_fee;
+                                        $grand_grand_total += $total_fee;
                                     @endphp
                                     <tr>
                                         <td>{{++$i}}.</td>
@@ -138,7 +143,7 @@
                                 <tfoot>
                                     <tr>
                                         <td colspan="11" class="text-center"><b>TOTAL</b></td>
-                                        <td>$&nbsp;{{comma_separated($grand_total * $header->usd_rate)}}</td>
+                                        <td>Rp.&nbsp;{{comma_separated($grand_total * $header->usd_rate)}}</td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -183,6 +188,7 @@
                                         + $item->detail_pedigree_fee
                                         + $item->detail_onsite_fee;
                                         $grand_total += $total_fee;
+                                        $grand_grand_total += $total_fee;
                                     @endphp
                                     <tr>
                                         <td>{{++$i}}.</td>
@@ -206,7 +212,19 @@
                                 <tfoot>
                                     <tr>
                                         <td colspan="14" class="text-center"><b>TOTAL</b></td>
-                                        <td>$&nbsp;{{comma_separated($grand_total * $header->usd_rate)}}</td>
+                                        <td>Rp.&nbsp;{{comma_separated($grand_total * $header->usd_rate)}}</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row py-3">
+                        <div class="col-12">
+                            <table class="table table-bordered text-center">
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="14" class="text-center"><b>Grand Total</b></td>
+                                        <td>Rp.&nbsp;{{comma_separated($grand_grand_total * $header->usd_rate)}}</td>
                                     </tr>
                                 </tfoot>
                             </table>
