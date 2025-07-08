@@ -128,7 +128,7 @@
                                         <td>{{++$i}}.</td>
                                         <td>{{$item->company->company_name}}</td>
                                         <td>{{$item->country->country_name}}</td>
-                                        <td>{{$item->item->item_name}}</td>
+                                        <td>{{$item->item->item_code}} - {{$item->item->country->country_code}} - {{comma_separated($item->item->nominal)}}</td>
                                         <td>{{$item->detail_serial_number}}</td>
                                         <td>{{$item->tier->detail_name}}</td>
                                         <td>{{$item->detail_description}}</td>

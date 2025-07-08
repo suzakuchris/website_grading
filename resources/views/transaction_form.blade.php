@@ -6,12 +6,14 @@
 
 @section('content')
 <form action="{{route('transaction.save')}}" method="POST" onsubmit="pre_submit(event, this);">
+    @if(isset($transaction))
     <div class="row">
         <div class="col"></div>
         <div class="col-auto">
             <a href="{{route('transaction.print', ['header_id' => $transaction->header_id])}}" class="btn btn-primary"><i class="bi bi-printer me-2"></i>Print</a>
         </div>
     </div>
+    @endif
     <fieldset @if($mode != 'add') disabled @endif class="border-0 p-2">
         @php
             if(isset($transaction)){
