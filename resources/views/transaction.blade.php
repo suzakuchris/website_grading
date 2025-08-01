@@ -111,7 +111,7 @@
                     <td>`+(++page)+`.</td>
                     <td>`+y.inv_number+`</td>
                     <td>`+y.customer_name+`</td>
-                    <td>`+numberWithCommas(y.fee_total)+`</td>
+                    <td>Rp. `+numberWithCommas(y.fee_total)+`</td>
                     <td>`+created+`</td>
                     <td>`+nm_created_by+`</td>
                     <td>

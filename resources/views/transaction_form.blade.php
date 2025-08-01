@@ -83,7 +83,7 @@
                                             <tr>
                                                 <td class="auto-width">Details</td>
                                                 <td>
-                                                    <div>{{$bank->item->item_code}} - {{$bank->item->country->country_code}} - {{comma_separated($bank->item->nominal)}}</div>
+                                                    <div>P-{{$bank->item->item_code}} - {{$bank->item->country->country_code}} - {{comma_separated($bank->item->nominal)}}</div>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -917,7 +917,7 @@
                                 <select class="form-control select-searchable" name="item_id" required>
                                     <option value="" selected disabled>Pilih Item</option>
                                     @foreach($items as $item)
-                                    <option value="{{$item->item_id}}">{{$item->item_code}} - {{$item->country->country_code}} - {{comma_separated($item->nominal)}}</option>
+                                    <option value="{{$item->item_id}}">P-{{$item->item_code}} - {{$item->country->country_code}} - {{comma_separated($item->nominal)}}</option>
                                     @endforeach 
                                 </select>
                             </div>

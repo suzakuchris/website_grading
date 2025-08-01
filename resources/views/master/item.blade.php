@@ -118,7 +118,7 @@
             rows += `
                 <tr>
                     <td>`+(++page)+`.</td>
-                    <td>`+y.item_code+`</td>
+                    <td>P-`+y.item_code+`</td>
                     <td>`+y.item_name+`</td>
                     <td>`+y.country_name+`</td>
                     <td>`+y.tahun+`</td>

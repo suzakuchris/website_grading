@@ -32,7 +32,7 @@
                         </div>
                         <div class="col-9 d-flex justify-content-end align-items-center">
                             <h5 class="me-2 mb-0">{{$header->inv_number}}</h5>
-                            <button id="print_btn" class="btn btn-primary hide-for-print" onclick="window.print();"><i class=""></i>Print</button>
+                            <button id="print_btn" class="btn btn-primary hide-for-print" onclick="window.print();"><i class=""></i>Print / Save PDF</button>
                         </div>
                         <div class="col-12">
                             <hr/>
@@ -104,11 +104,13 @@
                                         <th>Serial No.</th>
                                         <th>Tier</th>
                                         <th>Comment</th>
+                                        @if(false)
                                         <th>Base Fee</th>
                                         <th>Oversize</th>
                                         <th>Pedigree</th>
                                         <th>Onsite Fee</th>
                                         <th>Total Fee</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -128,21 +130,23 @@
                                         <td>{{++$i}}.</td>
                                         <td>{{$item->company->company_name}}</td>
                                         <td>{{$item->country->country_name}}</td>
-                                        <td>{{$item->item->item_code}} - {{$item->item->country->country_code}} - {{comma_separated($item->item->nominal)}}</td>
+                                        <td>P-{{$item->item->item_code}} - {{$item->item->country->country_code}} - {{comma_separated($item->item->nominal)}}</td>
                                         <td>{{$item->detail_serial_number}}</td>
                                         <td>{{$item->tier->detail_name}}</td>
                                         <td>{{$item->detail_description}}</td>
+                                        @if(false)
                                         <td>$&nbsp;{{comma_separated($item->detail_base_fee)}}</td>
                                         <td>$&nbsp;{{comma_separated($item->detail_oversize_fee)}}</td>
                                         <td>$&nbsp;{{comma_separated($item->detail_pedigree_fee)}}</td>
                                         <td>$&nbsp;{{comma_separated($item->detail_onsite_fee)}}</td>
                                         <td>$&nbsp;{{comma_separated($total_fee)}}</td>
+                                        @endif
                                     </tr>
                                     @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td colspan="11" class="text-center"><b>TOTAL</b></td>
+                                        <td colspan="7" class="text-center"><b>TOTAL</b></td>
                                         <td>Rp.&nbsp;{{comma_separated($grand_total * $header->usd_rate)}}</td>
                                     </tr>
                                 </tfoot>
@@ -168,12 +172,14 @@
                                         <th>MS/PF</th>
                                         <th>Tier</th>
                                         <th>Error?</th>
+                                        @if(false)
                                         <th>NCS Fee</th>
                                         <th>Base Fee</th>
                                         <th>Oversize</th>
                                         <th>Pedigree</th>
                                         <th>Onsite Fee</th>
                                         <th>Total Fee</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -200,18 +206,20 @@
                                         <td>{{$item->mspf->row_name}}</td>
                                         <td>{{$item->tier->detail_name}}</td>
                                         <td>{{$item->detail_has_error}}</td>
+                                        @if(false)
                                         <td>$&nbsp;{{comma_separated($item->detail_ncs_fee)}}</td>
                                         <td>$&nbsp;{{comma_separated($item->detail_base_fee)}}</td>
                                         <td>$&nbsp;{{comma_separated($item->detail_oversize_fee)}}</td>
                                         <td>$&nbsp;{{comma_separated($item->detail_pedigree_fee)}}</td>
                                         <td>$&nbsp;{{comma_separated($item->detail_onsite_fee)}}</td>
                                         <td>$&nbsp;{{comma_separated($total_fee)}}</td>
+                                        @endif
                                     </tr>
                                     @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td colspan="14" class="text-center"><b>TOTAL</b></td>
+                                        <td colspan="9" class="text-center"><b>TOTAL</b></td>
                                         <td>Rp.&nbsp;{{comma_separated($grand_total * $header->usd_rate)}}</td>
                                     </tr>
                                 </tfoot>
@@ -223,7 +231,7 @@
                             <table class="table table-bordered text-center">
                                 <tfoot>
                                     <tr>
-                                        <td colspan="14" class="text-center"><b>Grand Total</b></td>
+                                        <td colspan="7" class="text-center"><b>Grand Total</b></td>
                                         <td>Rp.&nbsp;{{comma_separated($grand_grand_total * $header->usd_rate)}}</td>
                                     </tr>
                                 </tfoot>
