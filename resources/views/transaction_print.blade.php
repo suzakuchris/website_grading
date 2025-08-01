@@ -144,12 +144,14 @@
                                     </tr>
                                     @endforeach
                                 </tbody>
+                                @if(false)
                                 <tfoot>
                                     <tr>
                                         <td colspan="7" class="text-center"><b>TOTAL</b></td>
                                         <td>Rp.&nbsp;{{comma_separated($grand_total * $header->usd_rate)}}</td>
                                     </tr>
                                 </tfoot>
+                                @endif
                             </table>
                         </div>
                     </div>
@@ -217,12 +219,14 @@
                                     </tr>
                                     @endforeach
                                 </tbody>
+                                @if(false)
                                 <tfoot>
                                     <tr>
                                         <td colspan="9" class="text-center"><b>TOTAL</b></td>
                                         <td>Rp.&nbsp;{{comma_separated($grand_total * $header->usd_rate)}}</td>
                                     </tr>
                                 </tfoot>
+                                @endif
                             </table>
                         </div>
                     </div>
