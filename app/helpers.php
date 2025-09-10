@@ -34,7 +34,7 @@
     }
 
     function tahun_lists($sort=null){
-        $start = 1970;
+        $start = 1500;
         $end = date('Y');
         $arr_return = [];
         for($i = $start; $i <= $end ; $i++){
